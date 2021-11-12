@@ -1,0 +1,31 @@
+<div class="grid-container">
+<div [@slideIn]>
+<form #SimpleForm="ngForm">
+  <div class="form-group">
+      <label for="userName">User Name: </label>
+      <input type="text" class="form-control" id="userName" required [(ngModel)] = "model.userName" 
+      name="userName" #userName="ngModel">
+      <div [hidden] ="userName.valid || userName.pristine" class="alert alert-danger">
+          User name is required
+      </div>
+  </div>
+
+  <div class="form-group">
+      <label for="courseName">Source: </label>
+      <select class="form-control" id="courseName" [(ngModel)] = "model.courseName" name="courseName">
+          <option *ngFor="let course of courseName" [value]="course">{{course}}</option>
+      </select>
+  </div> 
+</form>
+
+<button class="btn btn-success" [disabled]="!SimpleForm.form.valid" (click)="onSubmit()">Submit Form</button>
+</div>
+<br><br>
+<div *ngIf="response" [@fadeInOut]>
+	<p>Login Name: {{response.login}}</p>
+	<p>Followers: {{response.followers}}</p>
+	<p>Public Repos: {{response.public_repos}}</p>
+	<p>Avatar:</p>
+	<img src={{response.avatar_url}} style="max-height: 150px">
+</div>
+</div>
